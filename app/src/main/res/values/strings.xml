@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<resources>
+    <string name="app_name">Tokusatsus</string>
+  <string name="tokusatsu_ipsum">Produzido pela Toei Company. A premissa básica era um jovem que usava uma armadura metálica de última geração para combater uma organização maligna que ameaçasse a paz na Terra. Considerada uma grande inovação do Tokusatsu à época de sua criação, o gênero sofreu grandes e variadas modificações no decorrer dos anos, sofrendo um severo desgaste que culminou com o seu fim em 1997, após a exibição da última série, B-Fighter Kabuto. Embora tenham sido produzidas outras séries após esse período (como as infantis Robotack e Kabutack), elas não são incluídas como pertencentes à franquia na contagem oficial.
+O género teve início com a era dos Policiais do Espaço (宇宙刑事 Uchū Keiji?), trilogia formada pelas séries Gyaban, Sharivan e Shaider. Posteriormente, foram produzidas mais duas séries com a mesma premissa, porém a parte da "família" dos Policiais do Espaço: Jaspion, a primeira série tokusatsu exibida no Brasil nos anos 80, e Spielvan.
+
+No Brasil, foi o gênero que teve mais séries exibidas, desde Gyaban até Solbrain: Gyaban, Sharivan, Shaider, Jaspion, Spielvan, Metalder, Jiraiya, Jiban, Winspector e Solbrain.
+</string>
+  <string name="checkin">Verificar</string>
+  <string name="menu_settings">Definições</string>
+    <string name="Sair">Sair</string>
+
+</resources>
