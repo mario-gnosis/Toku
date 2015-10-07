@@ -16,45 +16,62 @@
 
 package com.support.android.designlibdemo;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Random;
+import android.content.Context;
 
-public class Tokusatsu {
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
-    public static Map<String, String> lista = new HashMap<String, String>();
+public class Tokusatsu  implements Serializable {
 
-      static {
+  public String name;
+  public String photo;
 
-        lista.put("Jiraya", "jiraiya.png");
-        lista.put("Jaspion", "jaspion.png");
-        lista.put("Jiban", "jiban.png");
-        lista.put("Changem", "changem.png");
-        lista.put("Lion Man", "lion_man.png");
-        lista.put("Goggle Five", "goggle_five.png");
-        lista.put("Spectreman", "spectreman.png");
-        lista.put("Machine Man", "machine_man.png");
-        lista.put("Cybercops", "cybercops.png");
-        lista.put("Metalder", "metalder.png");
-        lista.put("Flashman", "flashman.png");
-        lista.put("Black Kamen Rider", "blck_kamen_rider.png");
-        lista.put("Ultraman", "ultraman.png");
-        lista.put("Sharivan", "sharivan.png");
-        lista.put("Gyaban", "gyaban.png");
-        lista.put("Spielvan", "spielvan.png");
-        lista.put("Winspector", "winspector.png");
-        lista.put("Solbrain", "solbrain.png");
-        lista.put("National Kid", "national_kid.png");
-        lista.put("Vingadores do Espaço", "vinagadores.png");
-        lista.put("Policial Espacial Shaider", "shaider.png");
-        lista.put("Robo Gigante", "robo_gigante.png");
-        lista.put("Esper ou Vesper", "esper.png");
-        lista.put("Ultraman Jack", "ultraman_jack.png");
-        lista.put("Lion Man Branco", "lion_braco.png");
-        lista.put("ByCrossers", "bycrossers.png");
-        lista.put("Maskman", "maskman.png");
-        lista.put("Ryakendo", "ryukendo.png");
-    }
+  public Tokusatsu(){}
 
+  public Tokusatsu(String name, String photo){
+    this.name = name;
+    this.photo = photo;
+  }
+
+  public static List<Tokusatsu> prePopulate(){
+
+    List<Tokusatsu> list = new ArrayList<>();
+    list.add(new Tokusatsu("Jiraya", "jiraiya"));
+    list.add(new Tokusatsu("Jaspion", "jaspion"));
+    list.add(new Tokusatsu("Jiban", "jiban"));
+    list.add(new Tokusatsu("Changem", "changem"));
+    list.add(new Tokusatsu("Lion Man", "lion_man"));
+    list.add(new Tokusatsu("Goggle Five", "goggle_five"));
+    list.add(new Tokusatsu("Spectreman", "spectreman"));
+    list.add(new Tokusatsu("Machine Man", "machine_man"));
+    list.add(new Tokusatsu("Cybercops", "cybercops"));
+    list.add(new Tokusatsu("Metalder", "metalder"));
+    list.add(new Tokusatsu("Flashman", "flashman"));
+    list.add(new Tokusatsu("Black Kamen Rider", "blck_kamen_rider"));
+    list.add(new Tokusatsu("Ultraman", "ultraman"));
+    list.add(new Tokusatsu("Sharivan", "sharivan"));
+    list.add(new Tokusatsu("Gyaban", "gyaban"));
+    list.add(new Tokusatsu("Spielvan", "spielvan"));
+    list.add(new Tokusatsu("Winspector", "winspector"));
+    list.add(new Tokusatsu("Solbrain", "solbrain"));
+    list.add(new Tokusatsu("National Kid", "national_kid"));
+    list.add(new Tokusatsu("Vingadores do Espaço", "vinagadores"));
+    list.add(new Tokusatsu("Policial Espacial Shaider", "shaider"));
+    list.add(new Tokusatsu("Robo Gigante", "robo_gigante"));
+    list.add(new Tokusatsu("Esper ou Vesper", "esper"));
+    list.add(new Tokusatsu("Ultraman Jack", "ultraman_jack"));
+    list.add(new Tokusatsu("Lion Man Branco", "lion_braco"));
+    list.add(new Tokusatsu("ByCrossers", "bycrossers"));
+    list.add(new Tokusatsu("Maskman", "maskman"));
+    list.add(new Tokusatsu("Ryakendo", "ryukendo"));
+
+    return list;
+  }
+
+
+  public int getPhotoResourceId(Context context) {
+    return context.getResources().getIdentifier(photo, "drawable", context.getPackageName());
+  }
 }
 

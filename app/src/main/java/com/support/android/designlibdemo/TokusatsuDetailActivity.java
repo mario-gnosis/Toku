@@ -16,7 +16,7 @@
 
 package com.support.android.designlibdemo;
 
-import android.app.AlertDialog;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
@@ -30,9 +30,8 @@ import com.bumptech.glide.Glide;
 
 public class TokusatsuDetailActivity extends AppCompatActivity {
 
-    public static final String EXTRA_NAME = "tokusatsu_name";
-    private String nome_foto;
-
+    public static final String EXTRA_OBJECT = "extra_object";
+    private Tokusatsu tokusatsu;
 
     /*
     Responsável por fazer a criação dos componentes na tela. Sempre que quiser trabalhar com um componente de tela
@@ -46,9 +45,8 @@ public class TokusatsuDetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_detail);
 
         Intent intent = getIntent();
-        final String tokusatsuName = intent.getStringExtra(EXTRA_NAME);
+        tokusatsu = (Tokusatsu) intent.getSerializableExtra(EXTRA_OBJECT);
 
-        nome_foto = Tokusatsu.lista.get(tokusatsuName);
 
         final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -56,14 +54,14 @@ public class TokusatsuDetailActivity extends AppCompatActivity {
 
         CollapsingToolbarLayout collapsingToolbar =
                 (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
-        collapsingToolbar.setTitle(tokusatsuName);
+        collapsingToolbar.setTitle(tokusatsu.name);
 
         loadBackdrop();
     }
 
     private void loadBackdrop() {
         final ImageView imageView = (ImageView) findViewById(R.id.backdrop);
-        Glide.with(this).load(nome_foto).centerCrop().into(imageView);
+        Glide.with(this).load(tokusatsu.getPhotoResourceId(this)).centerCrop().into(imageView);
     }
 
 
