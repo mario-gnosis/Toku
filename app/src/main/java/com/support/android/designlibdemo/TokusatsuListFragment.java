@@ -32,10 +32,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.Random;
 
 public class TokusatsuListFragment extends Fragment {
 
@@ -50,20 +47,7 @@ public class TokusatsuListFragment extends Fragment {
 
     private void setupRecyclerView(RecyclerView recyclerView) {
         recyclerView.setLayoutManager(new LinearLayoutManager(recyclerView.getContext()));
-        recyclerView.setAdapter(new SimpleStringRecyclerViewAdapter(getActivity(),
-                Tokusatsu.lista.putAll((Map<String,String>))));
-    }
-
-
-
-
-    private List<String> getRandomSub(String[] array, int amount) {
-        ArrayList<String> list = new ArrayList<>(amount);
-        Random random = new Random();
-        while (list.size() < amount) {
-            list.add(array[random.nextInt(array.length)]);
-        }
-        return list;
+        recyclerView.setAdapter(new SimpleStringRecyclerViewAdapter(getActivity(), Tokusatsu.prePopulate()));
     }
 
     public static class SimpleStringRecyclerViewAdapter
@@ -71,36 +55,28 @@ public class TokusatsuListFragment extends Fragment {
 
         private final TypedValue mTypedValue = new TypedValue();
         private int mBackground;
-        private List<String> mValues;
+        private List<Tokusatsu> listTokusatsu;
+        private Context context;
 
         public static class ViewHolder extends RecyclerView.ViewHolder {
-            public String mBoundString;
 
-            public final View mView;
-            public final ImageView mImageView;
-            public final TextView mTextView;
+            View root;
+            ImageView imageViewAvatar;
+            TextView textViewName;
 
             public ViewHolder(View view) {
                 super(view);
-                mView = view;
-                mImageView = (ImageView) view.findViewById(R.id.avatar);
-                mTextView = (TextView) view.findViewById(android.R.id.text1);
-            }
-
-            @Override
-            public String toString() {
-                return super.toString() + " '" + mTextView.getText();
+                root = view;
+                imageViewAvatar = (ImageView) view.findViewById(R.id.avatar);
+                textViewName = (TextView) view.findViewById(R.id.name);
             }
         }
 
-        public String getValueAt(int position) {
-            return mValues.get(position);
-        }
-
-        public SimpleStringRecyclerViewAdapter(Context context, List<String> items) {
+        public SimpleStringRecyclerViewAdapter(Context context, List<Tokusatsu> items) {
             context.getTheme().resolveAttribute(R.attr.selectableItemBackground, mTypedValue, true);
             mBackground = mTypedValue.resourceId;
-            mValues = items;
+            listTokusatsu = items;
+            this.context = context;
         }
 
         @Override
@@ -113,31 +89,25 @@ public class TokusatsuListFragment extends Fragment {
 
         @Override
         public void onBindViewHolder(final ViewHolder holder, int position) {
-            holder.mBoundString = mValues.get(position);
-            holder.mTextView.setText(mValues.get(position));
+            final Tokusatsu tokusatsu = listTokusatsu.get(position);
+            holder.textViewName.setText(tokusatsu.name);
 
-            holder.mView.setOnClickListener(new View.OnClickListener() {
+            Glide.with(context).load(tokusatsu.getPhotoResourceId(context)).fitCenter().into(holder.imageViewAvatar);
+            holder.root.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Context context = v.getContext();
                     Intent intent = new Intent(context, TokusatsuDetailActivity.class);
-                    intent.putExtra(TokusatsuDetailActivity.EXTRA_NAME, holder.mBoundString);
-
+                    intent.putExtra(TokusatsuDetailActivity.EXTRA_OBJECT, tokusatsu);
                     context.startActivity(intent);
                 }
             });
-
-
-            Glide.with(holder.mImageView.getContext())
-                    .load(Tokusatsu.lista.get(mValues.get(position)))
-                    .fitCenter()
-                    .into(holder.mImageView);
 
         }
 
         @Override
         public int getItemCount() {
-            return mValues.size();
+            return listTokusatsu.size();
         }
 
     }
